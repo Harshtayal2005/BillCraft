@@ -27,8 +27,20 @@ const Register = () => {
 
   return (
     <>
-      <div className="h-screen flex justify-center items-center lg:flex">
-        <div className="hidden lg:block w-1/2 h-full bg-black">
+      <div className="relative h-screen flex justify-center items-center lg:flex">
+        <div className="lg:hidden absolute h-[2rem] w-[10rem] top-8 left-8 flex items-center gap-1">
+          <h1 className="font-dancing-script text-black text-3xl font-bold">
+            BillCraft
+          </h1>
+          <img src="/invoice.svg" alt="invlice-icon" className="h-full" />
+        </div>
+        <div className="relative hidden lg:block w-1/2 h-full bg-black">
+          <div className="absolute h-[2rem] w-[10rem] top-8 left-8 flex items-center gap-1">
+            <h1 className="font-dancing-script text-white text-3xl font-bold">
+              BillCraft
+            </h1>
+            <img src="/invoice.svg" alt="invlice-icon" className="h-full" />
+          </div>
           <img
             src="/macbook.jpg"
             alt="macbook_pic"
@@ -37,7 +49,7 @@ const Register = () => {
         </div>
         <div className="flex justify-center items-center w-1/2 h-full">
           <div className="flex flex-col gap-[4rem]">
-            <h1 className="text-3xl font-bold text-left">
+            <h1 className="text-2xl sm:text-3xl font-bold text-left">
               Create Your Account
             </h1>
             <form
@@ -55,7 +67,7 @@ const Register = () => {
                     {...register("fullname", {
                       required: "Full name is required",
                     })}
-                    className={`outline-none pl-3 rounded-lg h-[3.2rem] w-[13rem] border ${
+                    className={`outline-none pl-3 rounded-lg h-[3.2rem] w-40 sm:w-52 md:w-72 lg:w-52 border ${
                       errors.fullname ? "border-red-500" : "border-gray-300"
                     } hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
                   />
@@ -79,7 +91,7 @@ const Register = () => {
                         message: "At least 4 characters",
                       },
                     })}
-                    className={`outline-none pl-3 rounded-lg h-[3.2rem] w-[13rem] border ${
+                    className={`outline-none pl-3 rounded-lg h-[3.2rem] w-40 sm:w-52 md:w-72 lg:w-52 border ${
                       errors.username ? "border-red-500" : "border-gray-300"
                     } hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
                   />
@@ -154,7 +166,10 @@ const Register = () => {
                   }hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
                 />
                 {!showPassword && (
-                  <div className="absolute right-4 top-8 h-[3rem] w-[2rem] flex justify-center items-center hover:cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                  <div
+                    className="absolute right-4 top-8 h-[3rem] w-[2rem] flex justify-center items-center hover:cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
                     <img
                       src="/close.svg"
                       alt="close-eye"
@@ -163,7 +178,10 @@ const Register = () => {
                   </div>
                 )}
                 {showPassword && (
-                  <div className="absolute right-4 top-8 h-[3rem] w-[2rem] flex justify-center items-center hover:cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                  <div
+                    className="absolute right-4 top-8 h-[3rem] w-[2rem] flex justify-center items-center hover:cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
                     <img
                       src="/show.svg"
                       alt="open-eye"
