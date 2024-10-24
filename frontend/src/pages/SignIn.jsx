@@ -1,9 +1,159 @@
-
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 const SignIn = () => {
-  return (
-    <div>SignIn</div>
-  )
-}
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-export default SignIn
+  const navigate = useNavigate();
+  const [serverError, setServerError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("/api/v1/user/login", data);
+      navigate("/");
+    } catch (error) {
+      setServerError(error.response?.data?.error || "Login failed");
+    }
+  };
+
+  return (
+    <>
+      <div className="relative h-screen flex justify-center items-center lg:flex">
+        <div className="lg:hidden absolute h-[2rem] w-[10rem] top-8 left-8 flex items-center gap-1">
+          <h1 className="font-dancing-script text-black text-3xl font-bold">
+            BillCraft
+          </h1>
+          <img src="/invoice.svg" alt="invlice-icon" className="h-full" />
+        </div>
+        <div className="relative hidden lg:block w-1/2 h-full bg-black">
+          <div className="absolute h-[2rem] w-[10rem] top-8 left-8 flex items-center gap-1">
+            <h1 className="font-dancing-script text-white text-3xl font-bold">
+              BillCraft
+            </h1>
+            <img src="/invoice.svg" alt="invlice-icon" className="h-full" />
+          </div>
+          <img
+            src="/macbook.jpg"
+            alt="macbook_pic"
+            className="h-full w-full object-contain"
+          />
+        </div>
+        <div className="flex justify-center items-center w-2/3 lg:w-1/2 h-full">
+          <div className="flex flex-col gap-[4rem] w-full lg:w-2/3">
+            <h1 className="text-2xl sm:text-3xl font-bold text-left">
+              SignIn To Your Account
+            </h1>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-6"
+            >
+              <div className="flex flex-col gap-1">
+                <label htmlFor="email" className="text-[1rem] font-bold">
+                  Username or email
+                </label>
+                <input
+                  name="identifier"
+                  id="identifier"
+                  {...register("identifier", {
+                    required: "username or email is required",
+                  })}
+                  className={`outline-none pl-3 rounded-lg h-[3.2rem] border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
+                />
+                {errors.identifier && (
+                  <span className="text-red-500 text-sm">
+                    {errors.identifier.message}
+                  </span>
+                )}
+              </div>
+              <div className="relative flex flex-col gap-1">
+                <label htmlFor="password" className="text-[1rem] font-bold">
+                  Password
+                </label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                  className={`outline-none pl-3 rounded-lg h-[3.2rem] border ${
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  }hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
+                />
+                {!showPassword && (
+                  <div
+                    className="absolute right-4 top-8 h-[3rem] w-[2rem] flex justify-center items-center hover:cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    <img
+                      src="/close.svg"
+                      alt="close-eye"
+                      className="h-full w-full"
+                    />
+                  </div>
+                )}
+                {showPassword && (
+                  <div
+                    className="absolute right-4 top-8 h-[3rem] w-[2rem] flex justify-center items-center hover:cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    <img
+                      src="/show.svg"
+                      alt="open-eye"
+                      className="h-full w-full"
+                    />
+                  </div>
+                )}
+                {errors.password && (
+                  <span className="text-red-500 text-sm">
+                    {errors.password.message}
+                  </span>
+                )}
+              </div>
+
+              {/* Serever error */}
+              {serverError && (
+                <div className="text-red-500 text-center">{serverError}</div>
+              )}
+
+              <div className="flex justify-center">
+                <input
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`bg-gray-800 hover:bg-gray-900 w-full py-4 rounded-3xl text-white font-bold text-[0.9rem] hover:cursor-pointer ${
+                    isSubmitting ? "opacity-50 hover:cursor-not-allowed" : ""
+                  }`}
+                  value={isSubmitting ? "Loggin In..." : "LogIn"}
+                />
+              </div>
+              <div className="flex justify-center text-[1rem] text-gray-700">
+                <span>
+                  {`Don't have an account yet?`}{" "}
+                  <Link to="/register" className="underline">
+                    SignUp
+                  </Link>
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SignIn;
