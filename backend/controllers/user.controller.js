@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import jwt from "jsonwebtoken";
 
 const registerUser = async (req, res) => {
     const { username, fullname, email, password, businessName } = req.body;
@@ -63,4 +64,65 @@ const registerUser = async (req, res) => {
     }
 };
 
-export { registerUser };
+const loginUser = async (req, res) => {
+    // //identifier can be username or email
+    const { identifier, password } = req.body;
+
+    //validate the user
+    if (!identifier || !password) {
+        return res.status(400).json({
+            error: "All the fields are required",
+        });
+    }
+
+    try {
+        //check if user exist or not
+        const user = await User.findOne({
+            $or: [{ email: identifier }, { username: identifier }],
+        });
+
+        if (!user) {
+            return res.status(409).json({
+                error: "Account doesn't exist. Please register.",
+            });
+        }
+
+        //check for the password
+        const isPasswordValid = await user.comparePassword(password);
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                error: "Incorrect Password",
+            });
+        }
+        //Generate the token
+        const token = jwt.sign(
+            { id: user._id, username: user.username, isAdmin: user.isAdmin },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        );
+
+        //set the cookies
+        const cookieOptions = {
+            httpOnly: true, // Prevent client-side JS from accessing the cookie
+            secure: process.env.NODE_ENV === "production", // Ensure the cookie is only sent over HTTPS in production
+            sameSite: "strict", // Mitigate CSRF attacks
+            maxAge: 24 * 60 * 60 * 1000, // Cookie expiration time (1 day)
+        };
+        res.cookie("token", token, cookieOptions);
+
+        //remove password for response
+        const existedUser = await User.findById(user._id).select("-password");
+
+        //return
+        return res.status(200).json({
+            message: "Login Successful",
+            user: existedUser,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: `Server error, ${error}`,
+        });
+    }
+};
+
+export { registerUser, loginUser };
