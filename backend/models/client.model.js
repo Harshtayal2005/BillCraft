@@ -17,6 +17,9 @@ const clientSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        userAvatar: {
+            type: String // cloudinary URL
+        }
     },
     { timestamps: true }
 );

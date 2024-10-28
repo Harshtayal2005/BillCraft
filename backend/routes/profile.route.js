@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { authenticate } from "../middlewares/authenticate.middleware.js";
-import { getClients, getInfo } from "../controllers/profile.controller.js";
+import { getInfo } from "../controllers/user.controller.js";
+import { getClients } from "../controllers/client.controller.js";
 import { addClient } from "../controllers/client.controller.js";
+import { upload } from "../middlewares/multer.middleware.js";
 
 const router = Router();
 
@@ -9,7 +11,11 @@ const router = Router();
 router.route("/").get(authenticate, getInfo);
 
 //protected route to add user clients
-router.route("/add-client").post(authenticate, addClient);
+router.route("/add-client").post(
+    authenticate,
+    upload.single("userAvatar"),
+    addClient
+);
 
 //protected route to get user clients
 router.route("/clients").get(authenticate, getClients);

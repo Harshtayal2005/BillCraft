@@ -1,5 +1,32 @@
 import Client from "../models/client.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
+
+const getClients = async (req, res) => {
+    const { id } = req.user;
+
+    try {
+        const userClients = await Client.find({ userId: id });
+        if (!userClients.length) {
+            return res.status(404).json({
+                error: "No clients were found",
+            });
+        }
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    userClients,
+                    "Clients retrieved successfully"
+                )
+            );
+    } catch (error) {
+        return res.status(500).json({
+            error: `Clients can't be retrieved. Error: ${error.message}`,
+        });
+    }
+};
 
 const addClient = async (req, res) => {
     const { id } = req.user;
@@ -27,10 +54,24 @@ const addClient = async (req, res) => {
                 );
         } else {
             //Client don't exist, so create a fresh entry in the data base
+            let userAvatarLocalPath = "";
+            if (req.file) {
+                userAvatarLocalPath = req.file.path;
+            }
+            let avatar;
+            if (userAvatarLocalPath !== "") {
+                avatar = await uploadOnCloudinary(userAvatarLocalPath);
+                if (!avatar) {
+                    return res
+                        .status(500)
+                        .json({ error: "Avatar not uploaded" });
+                }
+            }
             const client = await Client.create({
                 userId: [id],
                 name,
                 email,
+                userAvatar: avatar.url || "",
             });
 
             if (!client) {
@@ -56,4 +97,4 @@ const addClient = async (req, res) => {
     }
 };
 
-export { addClient };
+export { addClient, getClients };
