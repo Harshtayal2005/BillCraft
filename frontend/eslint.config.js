@@ -33,8 +33,9 @@ export default [
         "warn",
         { allowConstantExport: true },
       ],
-      'no-unused-vars': 'off', //to disable error squiggles
-      'no-empty': 'off' // to disable error squiggles
+      "no-unused-vars": "off", //to disable error squiggles
+      "no-empty": "off", // to disable error squiggles,
+      "react/prop-types": "off", //to disable error messages while passing props
     },
   },
 ];

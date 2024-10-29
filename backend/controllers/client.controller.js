@@ -1,4 +1,5 @@
 import Client from "../models/client.model.js";
+import User from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
@@ -97,4 +98,23 @@ const addClient = async (req, res) => {
     }
 };
 
-export { addClient, getClients };
+const removeClient = async (req, res) => {
+    const { id } = req.user;
+    const { clientId } = req.params;
+    try {
+        const client = await Client.findById(clientId);
+        client.userId = client.userId.filter((userId) => !userId.equals(id));
+        if (client.userId.length === 0) {
+            await Client.deleteOne({ _id: clientId });
+            return res.status(200).json({
+                message: "Client removed as there are no associated users",
+            });
+        }
+        await client.save();
+        return res.status(200).json({ message: "User removed from client" });
+    } catch (error) {
+        return res.status(500).json({ error: `Serevr error, ${error}` });
+    }
+};
+
+export { addClient, getClients, removeClient };

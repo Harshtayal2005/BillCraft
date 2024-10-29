@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { authenticate } from "../middlewares/authenticate.middleware.js";
 import { getInfo } from "../controllers/user.controller.js";
-import { getClients } from "../controllers/client.controller.js";
+import { getClients, removeClient } from "../controllers/client.controller.js";
 import { addClient } from "../controllers/client.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 
@@ -19,5 +19,8 @@ router.route("/add-client").post(
 
 //protected route to get user clients
 router.route("/clients").get(authenticate, getClients);
+
+//protected route to delete user clients
+router.route("/remove/:clientId").delete(authenticate, removeClient)
 
 export default router;

@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
-const AddClientForm = () => {
+const AddClientForm = ({ handleClick }) => {
   const notify = () =>
     toast.success("Client added successfully", {
       position: "top-right",
@@ -20,11 +20,11 @@ const AddClientForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const [serverError, setServerError] = useState("");
-  const [fileName, setFileName] = useState("Choose File");
 
   const onSubmit = async (data) => {
     const formData = new FormData();
@@ -44,6 +44,7 @@ const AddClientForm = () => {
         }
       );
       notify();
+      reset();
     } catch (error) {
       setServerError(error.response?.data || error.message);
     }
@@ -51,21 +52,33 @@ const AddClientForm = () => {
   return (
     <>
       <ToastContainer />
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="w-full flex justify-center items-center min-h-screen">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col w-1/2 gap-8 p-10 border-2 border-black rounded-3xl"
+          className="flex flex-col w-2/3 sm:w-3/4 md:w-1/2 gap-8 p-4 sm:p-8 lg:p-10 border-2 border-black rounded-3xl"
         >
-          <div className="flex gap-2 items-center">
-            <p className="text-[1.3rem] font-bold">Profile Image: </p>
-            <input
-              type="file"
-              {...register("userAvatar")}
-              className="hover:cursor-pointer"
-            />
+          <div className="relative flex items-center">
+            <div className="flex flex-col lg:flex lg:flex-row gap-2">
+              <p className="text-[1.1rem] md:text-[1.3rem] font-bold">
+                Profile Image:{" "}
+              </p>
+              <input
+                type="file"
+                {...register("userAvatar")}
+                className="hover:cursor-pointer"
+              />
+            </div>
+            <div
+              onClick={() => handleClick()}
+              className="absolute hidden sm:block right-1 hover:cursor-pointer"
+            >
+              <img src="back.svg" alt="cross" className="h-8 w-8" />
+            </div>
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-[1.3rem] font-bold">Client Name</label>
+            <label className="text-[1.1rem] md:text-[1.3rem] font-bold">
+              Client Name
+            </label>
             <input
               name="name"
               id="name"
@@ -83,7 +96,10 @@ const AddClientForm = () => {
             )}
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="email" className="text-[1.3rem] font-bold">
+            <label
+              htmlFor="email"
+              className="text-[1.1rem] md:text-[1.3rem] font-bold"
+            >
               Email
             </label>
             <input
@@ -121,6 +137,14 @@ const AddClientForm = () => {
               }`}
               value={isSubmitting ? "Adding..." : "Add Client"}
             />
+          </div>
+          <div className="sm:hidden flex justify-center -mt-4">
+            <button
+              onClick={() => handleClick()}
+              className="bg-gray-800 hover:bg-gray-900 py-4 w-full rounded-3xl text-white font-bold text-[0.9rem]"
+            >
+              Back
+            </button>
           </div>
         </form>
       </div>

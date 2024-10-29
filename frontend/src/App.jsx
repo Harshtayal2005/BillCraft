@@ -22,10 +22,6 @@ const router = createBrowserRouter([
     path: "/clients",
     element: <Clients />
   },
-  {
-    path: "/add",
-    element: <AddClientForm />
-  },
 ]);
 
 function App() {
