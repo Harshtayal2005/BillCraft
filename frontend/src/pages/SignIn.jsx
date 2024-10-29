@@ -49,7 +49,7 @@ const SignIn = () => {
         <div className="flex justify-center items-center w-2/3 lg:w-1/2 h-full">
           <div className="flex flex-col gap-[4rem] w-full lg:w-2/3">
             <h1 className="text-2xl sm:text-3xl font-bold text-left">
-              SignIn To Your Account
+              LogIn To Your Account
             </h1>
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -92,7 +92,7 @@ const SignIn = () => {
                   })}
                   className={`outline-none pl-3 rounded-lg h-[3.2rem] border ${
                     errors.password ? "border-red-500" : "border-gray-300"
-                  }hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
+                  } hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
                 />
                 {!showPassword && (
                   <div

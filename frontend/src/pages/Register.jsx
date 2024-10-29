@@ -7,7 +7,6 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm();
 
@@ -138,7 +137,7 @@ const Register = () => {
                   })}
                   className={`outline-none pl-3 rounded-lg h-[3.2rem] border ${
                     errors.businessName ? "border-red-500" : "border-gray-300"
-                  }hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
+                  } hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
                 />
                 {errors.businessName && (
                   <span className="text-red-500 text-sm">
@@ -163,7 +162,7 @@ const Register = () => {
                   })}
                   className={`outline-none pl-3 rounded-lg h-[3.2rem] border ${
                     errors.password ? "border-red-500" : "border-gray-300"
-                  }hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
+                  } hover:shadow-[0px_0px_5px_4px_#e9d8fd] duration-300 focus:border-pink-400 focus:shadow-[0px_0px_5px_4px_#e9d8fd]`}
                 />
                 {!showPassword && (
                   <div
