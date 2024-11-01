@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         "dancing-script": ["Dancing script", "cursive"],
       },
+      screens: {
+        xsm: "540px",
+      },
     },
   },
   plugins: [],
