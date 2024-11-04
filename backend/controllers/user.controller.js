@@ -126,7 +126,6 @@ const loginUser = async (req, res) => {
 };
 
 const getInfo = async (req, res) => {
-    console.log(req.user);
     res.status(200).json({
         message: "Success!",
     });

@@ -22,3 +22,6 @@ Process:
 
 # add-client functionaity added(backend)
 # retrieve client functionaity added(backend)
+# add-client frontend using react-hook-form
+# remove client from frontend and backend
+# get all the clients associated with user

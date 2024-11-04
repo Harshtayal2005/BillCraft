@@ -7,7 +7,7 @@ import { countryList } from "./countryCodes.js";
 const Template1 = () => {
   const downloadPdf = () => {
     const input = document.getElementById("template-1");
-    html2canvas(input, { scale: 2 }).then((canvas) => {
+    html2canvas(input, { scale: 1 }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "pt", "a4"); // Set PDF to A4 size
 

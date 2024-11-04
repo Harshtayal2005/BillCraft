@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         "dancing-script": ["Dancing script", "cursive"],
+        "Montserrat": ["Montserrat", "sans-serif"],
       },
       screens: {
         xsm: "540px",
