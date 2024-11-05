@@ -3,8 +3,10 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddClientForm = ({ handleClick }) => {
+  const navigate = useNavigate();
   const notify = () =>
     toast.success("Client added successfully", {
       position: "top-right",
@@ -46,6 +48,7 @@ const AddClientForm = ({ handleClick }) => {
       notify();
       reset();
     } catch (error) {
+      navigate("/error")
       setServerError(error.response?.data || error.message);
     }
   };

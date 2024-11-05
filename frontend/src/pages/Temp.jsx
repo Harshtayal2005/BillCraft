@@ -1,22 +1,8 @@
-import { useEffect } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
-import axios from "axios";
-const Home = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    const verifyUser = async () => {
-      try {
-        const response = await axios.get("/api/v1/profile");
-        if (response.status !== 200) {
-          navigate("/welcome");
-        }
-      } catch (error) {
-        navigate("/welcome");
-      }
-    };
-    verifyUser();
-  }, [navigate]);
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
+const Temp = () => {
+    const navigate = useNavigate();
   return (
     <>
       <div className="min-h-screen flex">
@@ -53,33 +39,20 @@ const Home = () => {
           <div className="flex justify-between">
             <div className="flex flex-col gap-2">
               <h1 className="text-4xl">Welcome back, Harsh!</h1>
-              <h2 className="text-gray-500">
-                Take a look at all the beautiful templates available
-              </h2>
+              <h2 className="text-gray-500">Take a look at all the beautiful templates available</h2>
             </div>
             <div>
-              <button onClick={() => navigate("/clients")}>Clients</button>
+                <button onClick={() => navigate("/clients")}>Clients</button>
             </div>
           </div>
           <div className="flex flex-col gap-5">
             <div className="h-[30rem] rounded-xl border-2 border-black overflow-hidden flex gap-2">
-              <div className="bg-red-400 h-full w-[80%] overflow-auto">
-                <img
-                  src="template1.png"
-                  alt="space"
-                  className="h-[220%] w-full"
-                />
-              </div>
-              <div className="bg-red-500 w-[20%] flex justify-center items-center">
-                <button
-                  onClick={() =>
-                    window.open("http://localhost:5173/testing2", "_blank")
-                  }
-                  className="bg-gradient-to-t from-gray-800 to-yellow-500 py-3 px-10 text-2xl text-white font-bold rounded-2xl"
-                >
-                  Use
-                </button>
-              </div>
+                <div className="bg-red-400 h-full w-[80%] overflow-auto">
+                    <img src="template1.png" alt="space" className="h-[220%] w-full" />
+                </div>
+                <div className="bg-red-500 w-[20%] flex justify-center items-center">
+                    <button onClick={() => window.open('http://localhost:5173/testing2', '_blank')} className="bg-gradient-to-t from-gray-800 to-yellow-500 py-3 px-10 text-2xl text-white font-bold rounded-2xl">Use</button>
+                </div>
             </div>
           </div>
         </div>
@@ -88,4 +61,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Temp;

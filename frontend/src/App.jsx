@@ -6,6 +6,7 @@ import Clients from "./pages/Clients.jsx";
 import Template1 from "./pages/templates/Template1.jsx";
 import Welcome from "./components/Welcome.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import Temp from "./pages/Temp.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
   {
     path: "/welcome",
     element: <Welcome />
+  },
+  {
+    path: "/testing1",
+    element: <Temp />
+  },
+  {
+    path: "/testing2",
+    element: <Template1 />
   },
   {
     path: "*",
