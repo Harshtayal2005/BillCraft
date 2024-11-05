@@ -19,5 +19,8 @@ import userRouter from "./routes/user.route.js";
 import profileRouter from "./routes/profile.route.js";
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/profile", profileRouter);
+app.get("/", (req, res) => {
+    res.send("hello world");
+})
 
 export default app;
