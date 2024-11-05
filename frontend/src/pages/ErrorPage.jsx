@@ -6,7 +6,7 @@ const ErrorPage = () => {
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="flex flex-col items-center gap-5">
-        <h1 className='text-[8rem] xsm:text-[10rem] md:text-[15rem] font-[900] bg-[url("space-bg.jpg")] bg-cover bg-clip-text text-transparent font-Montserrat font-stretch-[condensed] tracking-[-0.05em] leading-[0.9]'>
+        <h1 className='text-[8rem] xsm:text-[10rem] md:text-[15rem] font-[900] bg-[url("/space.jpg")] bg-cover bg-clip-text text-transparent text-black'>
           Oops!
         </h1>
         <h2 className="font-bold text-lg xsm:text-xl md:text-2xl">
