@@ -1,0 +1,36 @@
+{
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    },
+    {
+      "src": "/register",
+      "dest": "/"
+    },
+    {
+      "src": "/signin",
+      "dest": "/"
+    },
+    {
+      "src": "/clients",
+      "dest": "/"
+    },
+    {
+      "src": "/welcome",
+      "dest": "/"
+    },
+    {
+      "src": "/testing1",
+      "dest": "/"
+    },
+    {
+      "src": "/testing2",
+      "dest": "/"
+    },
+    {
+      "src": "*",
+      "dest": "/"
+    }
+  ]
+}
