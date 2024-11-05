@@ -55,17 +55,11 @@ const addClient = async (req, res) => {
                 );
         } else {
             //Client don't exist, so create a fresh entry in the data base
-            let userAvatarLocalPath = "";
-            if (req.file) {
-                userAvatarLocalPath = req.file.path;
-            }
             let avatar;
-            if (userAvatarLocalPath !== "") {
-                avatar = await uploadOnCloudinary(userAvatarLocalPath);
+            if (req.file) {
+                avatar = await uploadOnCloudinary(req.file.buffer);
                 if (!avatar) {
-                    return res
-                        .status(500)
-                        .json({ error: "Avatar not uploaded" });
+                    return res.status(500).json({ error: "Avatar not uploaded" });
                 }
             }
             const client = await Client.create({
