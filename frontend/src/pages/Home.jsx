@@ -6,7 +6,8 @@ const Home = () => {
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const response = await axios.get("/api/v1/profile");
+        // const response = await axios.get("/api/v1/profile");
+        const response = await axios.get("https://bill-craft-backend.vercel.app/api/v1/profile/");
         if (response.status !== 200) {
           navigate("/welcome");
         }
