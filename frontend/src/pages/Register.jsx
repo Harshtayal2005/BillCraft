@@ -204,8 +204,10 @@ const Register = () => {
                 <input
                   type="submit"
                   disabled={isSubmitting}
-                  className={`bg-gray-800 hover:bg-gray-900 w-full py-4 rounded-3xl text-white font-bold text-[0.9rem] hover:cursor-pointer ${
-                    isSubmitting ? "opacity-50 hover:cursor-not-allowed" : ""
+                  className={`bg-gray-800 hover:bg-gray-900 w-full py-4 rounded-3xl text-white font-bold text-[0.9rem] ${
+                    isSubmitting
+                      ? "opacity-50 hover:cursor-not-allowed"
+                      : "hover:cursor-pointer"
                   }`}
                   value={isSubmitting ? "Registering..." : "Create Account"}
                 />
