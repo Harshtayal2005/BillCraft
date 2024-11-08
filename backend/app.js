@@ -17,7 +17,9 @@ app.use(cookieParser());
 
 import userRouter from "./routes/user.route.js";
 import profileRouter from "./routes/profile.route.js";
+import userAvatarRouter from "./routes/userAvatar.route.js"
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/profile", profileRouter);
+app.use("/api/v1/addAvatar", userAvatarRouter)
 
 export default app;
