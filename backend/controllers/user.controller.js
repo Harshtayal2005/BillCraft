@@ -137,9 +137,22 @@ const logoutUser = async (req, res) => {
 };
 
 const getInfo = async (req, res) => {
-    res.status(200).json({
-        message: "Success!",
-    });
+    const { id } = req.user;
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(401).json({
+                error: "User doesn't exist!",
+            });
+        }
+        res.status(200).json(
+            new ApiResponse(200, user, "User info retrieved successfully!")
+        );
+    } catch (error) {
+        res.status(500).json({
+            error: `Internal Server error: ${error.message}`,
+        });
+    }
 };
 
 export { registerUser, loginUser, getInfo, logoutUser };
