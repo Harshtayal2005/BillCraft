@@ -3,11 +3,8 @@ import Register from "./pages/Register.jsx";
 import Home from "./pages/Home.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import Clients from "./pages/Clients.jsx";
-import Template1 from "./pages/templates/Template1.jsx";
 import Welcome from "./pages/Welcome.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
-import Temp from "./pages/Temp.jsx";
-import AvatarUploader from "./components/avatarUploader.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,14 +26,6 @@ const router = createBrowserRouter([
   {
     path: "/welcome",
     element: <Welcome />
-  },
-  {
-    path: "/testing1",
-    element: <AvatarUploader />
-  },
-  {
-    path: "/testing2",
-    element: <Template1 />
   },
   {
     path: "*",
