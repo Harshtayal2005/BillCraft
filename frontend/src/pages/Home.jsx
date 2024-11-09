@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import AvatarUploader from "../components/avatarUploader.jsx";
+import AvatarUploader from "../components/AvatarUploader.jsx";
 const Home = () => {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState(null);
