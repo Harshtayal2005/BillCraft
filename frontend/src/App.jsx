@@ -5,6 +5,7 @@ import SignIn from "./pages/SignIn.jsx";
 import Clients from "./pages/Clients.jsx";
 import Welcome from "./pages/Welcome.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import Template1 from "./pages/templates/Template1.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/welcome",
     element: <Welcome />
+  },
+  {
+    path: "/template1",
+    element: <Template1 />
   },
   {
     path: "*",

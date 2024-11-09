@@ -7,6 +7,7 @@ const Home = () => {
   const [avatar, setAvatar] = useState(null);
   const [toggle, setToggle] = useState(0);
   const [userInfo, setUserInfo] = useState([]);
+  const [templates, setTemplates] = useState([1, 2, 3, 4, 5, 6, 7, 8]);
   useEffect(() => {
     const verifyUser = async () => {
       try {
@@ -98,34 +99,15 @@ const Home = () => {
             </div>
           </div>
           <div className="flex flex-wrap justify-between gap-8">
-            <div className="h-[30rem] w-[20rem] bg-red-500 rounded-lg border border-gray-300 overflow-hidden">
-              <img
-                src="template1.png"
-                alt="template1"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="h-[30rem] w-[20rem] bg-red-500 rounded-lg border border-gray-300 overflow-hidden">
-              <img
-                src="template1.png"
-                alt="template1"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="h-[30rem] w-[20rem] bg-red-500 rounded-lg border border-gray-300 overflow-hidden">
-              <img
-                src="template1.png"
-                alt="template1"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="h-[30rem] w-[20rem] bg-red-500 rounded-lg border border-gray-300 overflow-hidden">
-              <img
-                src="template1.png"
-                alt="template1"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            {templates.map((template) => (
+              <div key={template} onClick={() => window.open("https://bill-craft-by-harshtayal.vercel.app//template1")} className="h-[30rem] w-[20rem] bg-red-500 rounded-lg border border-gray-300 overflow-hidden">
+                <img
+                  src="template1.png"
+                  alt="template1"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
