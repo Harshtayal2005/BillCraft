@@ -125,10 +125,21 @@ const loginUser = async (req, res) => {
     }
 };
 
+const logoutUser = async (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+    });
+    return res.status(200).json({
+        message: "Logout successful!",
+    });
+};
+
 const getInfo = async (req, res) => {
     res.status(200).json({
         message: "Success!",
     });
 };
 
-export { registerUser, loginUser, getInfo };
+export { registerUser, loginUser, getInfo, logoutUser };
