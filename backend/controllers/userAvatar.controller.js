@@ -24,20 +24,31 @@ const addUserAvatar = async (req, res) => {
         } else {
             avatarUrl = "https://api.dicebear.com/9.x/adventurer/svg";
         }
-        const createdUserAvatar = await UserAvatar.create({
-            userId: id,
-            avatarUrl,
-        });
-
-        if (!createdUserAvatar) {
-            return res.status(500).json({
-                error: "Something went wrong while uploading the avatar",
+        const existedUserAvatar = await UserAvatar.findOne({ userId: id });
+        if (!existedUserAvatar) {
+            const createdUserAvatar = await UserAvatar.create({
+                userId: id,
+                avatarUrl,
             });
+            if (!createdUserAvatar) {
+                return res.status(500).json({
+                    error: "Something went wrong while uploading the avatar",
+                });
+            }
+            return res
+                .status(201)
+                .json(
+                    new ApiResponse(201, createdUserAvatar, "Avatar Uploaded!")
+                );
+        } else {
+            existedUserAvatar.avatarUrl = avatarUrl;
+            await existedUserAvatar.save();
+            return res
+                .status(200)
+                .json(
+                    new ApiResponse(200, existedUserAvatar, "Avatar Updated!")
+                );
         }
-
-        return res
-            .status(201)
-            .json(new ApiResponse(201, createdUserAvatar, "Avatar Uploaded!"));
     } catch (error) {
         return res
             .status(500)
@@ -46,4 +57,3 @@ const addUserAvatar = async (req, res) => {
 };
 
 export { addUserAvatar };
-
