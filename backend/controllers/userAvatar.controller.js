@@ -56,4 +56,30 @@ const addUserAvatar = async (req, res) => {
     }
 };
 
-export { addUserAvatar };
+const getUserAvatar = async (req, res) => {
+    const { id } = req.user;
+    const DEFAULT_AVATAR_URL = "https://api.dicebear.com/9.x/adventurer/svg";
+    try {
+        let avatar = await UserAvatar.findOne({ userId: id });
+        if (!avatar) {
+            avatar = await UserAvatar.create({
+                userId: id,
+                avatarUrl: DEFAULT_AVATAR_URL,
+            });
+            return res
+                .status(201)
+                .json(new ApiResponse(201, avatar, "Default avatar created"));
+        }
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(200, avatar, "Avatar retrieved successfully!")
+            );
+    } catch (error) {
+        return res.status(500).json({
+            error: `Internal Server error: ${error.message}`,
+        });
+    }
+};
+
+export { addUserAvatar, getUserAvatar };

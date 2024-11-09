@@ -20,6 +20,6 @@ import profileRouter from "./routes/profile.route.js";
 import userAvatarRouter from "./routes/userAvatar.route.js"
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/profile", profileRouter);
-app.use("/api/v1/addAvatar", userAvatarRouter)
+app.use("/api/v1/userAvatar", userAvatarRouter)
 
 export default app;
