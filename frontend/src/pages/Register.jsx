@@ -28,14 +28,14 @@ const Register = () => {
     <>
       <div className="relative h-screen flex justify-center items-center lg:flex">
         <div className="lg:hidden absolute h-[2rem] w-[10rem] top-8 left-8 flex items-center gap-1">
-          <h1 className="font-dancing-script text-black text-3xl font-bold">
+          <h1 className="font-great-vibes-regular text-black text-3xl font-bold">
             BillCraft
           </h1>
           <img src="/invoice.svg" alt="invlice-icon" className="h-full" />
         </div>
         <div className="relative hidden lg:block w-1/2 h-full bg-black">
           <div className="absolute h-[2rem] w-[10rem] top-8 left-8 flex items-center gap-1">
-            <h1 className="font-dancing-script text-white text-3xl font-bold">
+            <h1 className="font-great-vibes-regular text-white text-3xl font-bold">
               BillCraft
             </h1>
             <img src="/invoice.svg" alt="invlice-icon" className="h-full" />

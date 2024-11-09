@@ -7,11 +7,12 @@ const Clients = () => {
   const [clients, setClients] = useState([
     {
       _id: "Harsh-default",
-      name: "Harsh Fav Client",
+      name: "Harsh Fav Client ❤️",
       email: "soyaa0301@gmail.com",
-      userAvatar: "jisoo.jpeg",
+      userAvatar: "jisoo.png",
     },
   ]);
+  const [toggleForm, setToggleForm] = useState(0);
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -22,7 +23,7 @@ const Clients = () => {
       }
     };
     fetchClients();
-  }, [clients]);
+  }, [clients, toggleForm]);
 
   const removeClient = async (clientId) => {
     try {
@@ -33,7 +34,6 @@ const Clients = () => {
     } catch (error) {}
   };
 
-  const [toggleForm, setToggleForm] = useState(0);
   const handleClick = () => {
     setToggleForm(1 - toggleForm);
   };

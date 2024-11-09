@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         "dancing-script": ["Dancing script", "cursive"],
-        "Noto-serif": ["Noto Serif", "serif"],
+        "great-vibes-regular": ["Great Vibes", "cursive"]
       },
       screens: {
         xsm: "540px",

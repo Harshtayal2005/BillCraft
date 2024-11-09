@@ -7,7 +7,7 @@ const Welcome = () => {
     <>
       <div className="h-screen bg-black flex flex-col">
         <div className="flex text-white items-center gap-1 absolute left-4 top-4">
-          <h1 className="text-3xl font-dancing-script">BillCraft</h1>
+          <h1 className="text-3xl font-great-vibes-regular">BillCraft</h1>
           <img src="/invoice.svg" alt="" className="h-5 w-5" />
         </div>
         <div className="h-full rounded-xl text-white flex items-center">
@@ -15,7 +15,7 @@ const Welcome = () => {
             <div className="flex items-center gap-2">
               <h1 className="text-7xl">
                 Welcome to{" "}
-                <span className="font-dancing-script">BillCraft</span>
+                <span className="font-great-vibes-regular">BillCraft</span>
               </h1>
             </div>
             <div className="w-2/3 text-gray-400">

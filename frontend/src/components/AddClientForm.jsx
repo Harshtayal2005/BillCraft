@@ -19,6 +19,18 @@ const AddClientForm = ({ handleClick }) => {
       theme: "dark",
     });
 
+  const notifyError = (message) =>
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+
   const {
     register,
     handleSubmit,
@@ -32,8 +44,25 @@ const AddClientForm = ({ handleClick }) => {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("email", data.email);
-    if (data.userAvatar && data.userAvatar[0])
-      formData.append("userAvatar", data.userAvatar[0]);
+    const file = data.userAvatar && data.userAvatar[0];
+
+    if (!file) {
+      setServerError("Please select a profile image.");
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      notifyError("Only image files are allowed.");
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      // 2MB limit
+      notifyError("File size should not exceed 2MB.");
+      return;
+    }
+
+    formData.append("userAvatar", file);
 
     try {
       const response = await axios.post(
@@ -48,7 +77,7 @@ const AddClientForm = ({ handleClick }) => {
       notify();
       reset();
     } catch (error) {
-      navigate("/error")
+      navigate("/error");
       setServerError(error.response?.data || error.message);
     }
   };
@@ -136,7 +165,9 @@ const AddClientForm = ({ handleClick }) => {
               type="submit"
               disabled={isSubmitting}
               className={`bg-gray-800 hover:bg-gray-900 w-full py-4 rounded-3xl text-white font-bold text-[0.9rem] ${
-                isSubmitting ? "opacity-50 hover:cursor-not-allowed" : "hover:cursor-pointer"
+                isSubmitting
+                  ? "opacity-50 hover:cursor-not-allowed"
+                  : "hover:cursor-pointer"
               }`}
               value={isSubmitting ? "Adding..." : "Add Client"}
             />
