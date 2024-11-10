@@ -4,6 +4,8 @@ import axios from "axios";
 import AvatarUploader from "../components/AvatarUploader.jsx";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
+import { TbLogout2 } from "react-icons/tb";
+import { RxAvatar } from "react-icons/rx";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ const Home = () => {
   const [toggle, setToggle] = useState(0);
   const [userInfo, setUserInfo] = useState([]);
   const [templates, setTemplates] = useState([1, 2, 3, 4, 5, 6, 7, 8]);
-  const [hamBurgerMenu, setHamBurgerMenu] = useState(0);
+  const [hamBurgerMenu, setHamBurgerMenu] = useState(1);
   useEffect(() => {
     const verifyUser = async () => {
       try {
@@ -39,6 +41,9 @@ const Home = () => {
   const handleClick = () => {
     setToggle(1 - toggle);
   };
+  const handleHamBurgerClick = () => {
+    setHamBurgerMenu(1 - hamBurgerMenu);
+  };
 
   const handleLogoutClick = async () => {
     try {
@@ -54,7 +59,7 @@ const Home = () => {
     <>
       {toggle === 1 && <AvatarUploader handleClick={handleClick} />}
       <div className={`${toggle === 1 && "hidden"} min-h-screen flex`}>
-        <div className="hidden w-[20%] bg-gradient-to-tl from-gray-900 to-lime-700 lg:flex flex-col justify-between items-center py-7 text-white">
+        <div className="hidden w-[20%] bg-gradient-to-tl from-gray-900 to-lime-700 lg:flex flex-col justify-between items-center py-7 text-gray-200">
           <div className="flex flex-col gap-20">
             <div className="flex gap-1 justify-center">
               <h1 className="font-great-vibes-regular font-bold text-2xl">
@@ -65,22 +70,27 @@ const Home = () => {
             <div className="flex flex-col items-center gap-1">
               <div className="flex flex-col gap-1 items-center">
                 <div className="h-20 w-20 rounded-full overflow-hidden">
-                  <img
-                    src={avatar}
-                    alt="avatar"
-                    className="h-full w-full object-cover"
-                  />
+                  <img src={avatar} alt="avatar" />
                 </div>
-                <h1 className="text-2xl">{userInfo.fullname}</h1>
+                <h1 className="text-2xl hover:text-green-200">
+                  {userInfo.fullname}
+                </h1>
               </div>
-              <div>
-                <button onClick={handleClick}>Add Yours</button>
+              <div className="flex items-center gap-1">
+                <RxAvatar />
+                <button className="hover:text-green-200" onClick={handleClick}>
+                  Add Yours
+                </button>
               </div>
             </div>
           </div>
 
-          <div className="flex justify-center sticky bottom-8">
-            <button onClick={handleLogoutClick} className="font-bold text-2xl">
+          <div
+            onClick={handleLogoutClick}
+            className="flex justify-center items-center sticky bottom-8 gap-1 hover:cursor-pointer"
+          >
+            <TbLogout2 className="text-2xl text-gray-200" />
+            <button className="font-bold text-2xl hover:text-green-200 text-gray-200">
               Log Out
             </button>
           </div>
@@ -88,24 +98,70 @@ const Home = () => {
         <div className="w-full lg:w-[80%] px-8 pt-8 flex flex-col gap-14">
           <div className="flex justify-between">
             <div className="flex flex-col gap-2">
-              <h1 className="text-4xl font-bold">Welcome back, {userInfo.fullname}</h1>
-              <h2 className="text-gray-500">
+              <h1 className="text-xl xsm:text-2xl sm:text-4xl font-bold">
+                Welcome back, {userInfo.fullname}
+              </h1>
+              <h2 className="text-xs xsm:text-sm sm:text-base text-gray-500">
                 Take a look at all the beautiful templates available
               </h2>
             </div>
             <div className="flex justify-center items-center">
               <button
                 onClick={() => navigate("/clients")}
-                className="hidden lg:block bg-gradient-to-tl from-gray-900 to-lime-700 text-yellow-400 py-3 px-8 rounded-full"
+                className="hidden lg:block bg-gradient-to-tl from-gray-900 to-lime-700 text-white text-xl py-3 px-8 rounded-full hover:text-green-200"
               >
                 Clients
               </button>
-              <GiHamburgerMenu className="lg:hidden text-3xl mr-3" />
+              <div
+                className={`${
+                  hamBurgerMenu === 1 && "hidden"
+                } absolute rounded-bl-3xl lg:hidden bg-black text-white flex flex-col items-center h-1/2 w-1/2 top-0 right-0`}
+              >
+                <div className="flex flex-col items-center gap-2 mt-24">
+                  <div className="h-16 w-16 sm:h-20 sm:w-20 overflow-hidden rounded-full">
+                    <img src={avatar} alt="avatar" />
+                  </div>
+                  <h1 className="text-xl sm:text-2xl">{userInfo.fullname}</h1>
+                  <div className="flex items-center gap-1 mt-2 text-lg sm:text-xl">
+                  <RxAvatar />
+                    <button onClick={handleClick}>Add Yours</button>
+                  </div>
+                </div>
+                <div
+                  onClick={handleLogoutClick}
+                  className="flex justify-center items-center hover:cursor-pointer absolute bottom-5 gap-1"
+                >
+                  <TbLogout2 className="text-2xl" />
+                  <button className="font-bold text-xl sm:text-2xl">
+                    Log Out
+                  </button>
+                </div>
+              </div>
+              <GiHamburgerMenu
+                onClick={handleHamBurgerClick}
+                className={`${
+                  hamBurgerMenu === 0 && "hidden"
+                } absolute top-8 right-6 lg:hidden text-xl sm:text-3xl text-black hover:cursor-pointer`}
+              />
+              <ImCross
+                onClick={handleHamBurgerClick}
+                className={`${
+                  hamBurgerMenu === 1 && "hidden"
+                } absolute top-9 right-7 lg:hidden text-lg sm:text-2xl text-white hover:cursor-pointer`}
+              />
             </div>
           </div>
           <div className="flex flex-wrap justify-evenly gap-8">
             {templates.map((template) => (
-              <div key={template} onClick={() => window.open("https://bill-craft-by-harshtayal.vercel.app//template1")} className="h-[30rem] w-[20rem] rounded-lg border border-gray-300 overflow-hidden hover:cursor-pointer hover:scale-105 duration-500">
+              <div
+                key={template}
+                onClick={() =>
+                  window.open(
+                    "https://bill-craft-by-harshtayal.vercel.app//template1"
+                  )
+                }
+                className="h-[30rem] w-[20rem] rounded-lg border border-gray-300 overflow-hidden hover:cursor-pointer lg:hover:scale-105 duration-500"
+              >
                 <img
                   src="template1.png"
                   alt="template1"
