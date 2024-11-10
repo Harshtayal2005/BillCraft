@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import ClientInfoBox from "../components/ClientInfoBox.jsx";
 import AddClientForm from "../components/AddClientForm.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Clients = () => {
+  const navigate = useNavigate();
   const [clients, setClients] = useState([
     {
       _id: "Harsh-default",
@@ -13,12 +15,15 @@ const Clients = () => {
     },
   ]);
   const [toggleForm, setToggleForm] = useState(0);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchClients = async () => {
       try {
         const response = await axios.get("/api/v1/profile/clients");
         setClients(response.data.data);
+        setLoading(false);
       } catch (error) {
+        navigate("/error")
         console.log("No Clients were found for this user");
       }
     };
@@ -31,7 +36,9 @@ const Clients = () => {
       setClients((prevClients) =>
         prevClients.filter((client) => client._id !== clientId)
       );
-    } catch (error) {}
+    } catch (error) {
+      navigate("/error");
+    }
   };
 
   const handleClick = () => {
@@ -40,6 +47,11 @@ const Clients = () => {
 
   return (
     <>
+      {loading && (
+        <div className="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50">
+          <div className="spinner-border animate-spin h-24 w-24 border-t-4 border-teal-700 rounded-full"></div>
+        </div>
+      )}
       {toggleForm === 1 && <AddClientForm handleClick={handleClick} />}
       <div
         className={`${

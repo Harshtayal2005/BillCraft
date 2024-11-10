@@ -6,6 +6,7 @@ import Clients from "./pages/Clients.jsx";
 import Welcome from "./pages/Welcome.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Template1 from "./pages/templates/Template1.jsx";
+import Temp from "./pages/Temp.jsx";
 
 const router = createBrowserRouter([
   {

@@ -14,6 +14,7 @@ const Home = () => {
   const [userInfo, setUserInfo] = useState([]);
   const [templates, setTemplates] = useState([1, 2, 3, 4, 5, 6, 7, 8]);
   const [hamBurgerMenu, setHamBurgerMenu] = useState(1);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const verifyUser = async () => {
       try {
@@ -26,7 +27,6 @@ const Home = () => {
         navigate("/welcome");
       }
     };
-    verifyUser();
     const getAvatar = async () => {
       try {
         const response = await axios.get("/api/v1/userAvatar/getAvatar");
@@ -35,7 +35,12 @@ const Home = () => {
         navigate("/welcome");
       }
     };
-    getAvatar();
+    const fetchData = async () => {
+      await verifyUser();
+      await getAvatar();
+      setLoading(false);
+    };
+    fetchData();
   }, [navigate, toggle]);
 
   const handleClick = () => {
@@ -57,6 +62,11 @@ const Home = () => {
 
   return (
     <>
+      {loading && (
+        <div className="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50">
+          <div className="spinner-border animate-spin h-24 w-24 border-t-4 border-green-600 rounded-full"></div>
+        </div>
+      )}
       {toggle === 1 && <AvatarUploader handleClick={handleClick} />}
       <div className={`${toggle === 1 && "hidden"} min-h-screen flex`}>
         <div className="hidden w-[20%] bg-gradient-to-tl from-gray-900 to-lime-700 lg:flex flex-col justify-between items-center py-7 text-gray-200">
@@ -123,7 +133,7 @@ const Home = () => {
                   </div>
                   <h1 className="text-xl sm:text-2xl">{userInfo.fullname}</h1>
                   <div className="flex items-center gap-1 mt-2 text-lg sm:text-xl">
-                  <RxAvatar />
+                    <RxAvatar />
                     <button onClick={handleClick}>Add Yours</button>
                   </div>
                 </div>
