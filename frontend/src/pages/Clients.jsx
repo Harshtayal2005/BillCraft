@@ -23,7 +23,7 @@ const Clients = () => {
         setClients(response.data.data);
         setLoading(false);
       } catch (error) {
-        navigate("/error")
+        setLoading(false);
         console.log("No Clients were found for this user");
       }
     };
