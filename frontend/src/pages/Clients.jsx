@@ -3,6 +3,9 @@ import ClientInfoBox from "../components/ClientInfoBox.jsx";
 import AddClientForm from "../components/AddClientForm.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { IoArrowBackCircle } from "react-icons/io5";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Clients = () => {
   const navigate = useNavigate();
@@ -16,6 +19,17 @@ const Clients = () => {
   ]);
   const [toggleForm, setToggleForm] = useState(0);
   const [loading, setLoading] = useState(true);
+  const notify = () =>
+    toast.success("Client removed", {
+      position: "top-right",
+      autoClose: 500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -31,8 +45,10 @@ const Clients = () => {
   }, [clients, toggleForm]);
 
   const removeClient = async (clientId) => {
+    alert("You sure you want to remove the client?");
     try {
       await axios.delete(`/api/v1/profile/remove/${clientId}`);
+      notify();
       setClients((prevClients) =>
         prevClients.filter((client) => client._id !== clientId)
       );
@@ -47,6 +63,7 @@ const Clients = () => {
 
   return (
     <>
+      <ToastContainer />
       {loading && (
         <div className="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50">
           <div className="spinner-border animate-spin h-24 w-24 border-t-4 border-teal-700 rounded-full"></div>
@@ -59,14 +76,16 @@ const Clients = () => {
         } min-h-screen bg-teal-900 py-3 px-10`}
       >
         <div className="flex justify-end sm:justify-between mb-6">
-          <div className="bg-green-500 hidden sm:flex items-center px-2 rounded-lg">
-            <p className="font-bold">
-              Please refresh the page if client is not added
-            </p>
+          <div
+            onClick={() => navigate("/")}
+            className="bg-green-600 hover:bg-green-700 hidden sm:flex items-center px-2 border-2 border-black rounded-lg gap-1 hover:cursor-pointer"
+          >
+            <IoArrowBackCircle />
+            <button className="font-bold">Back to dashboard</button>
           </div>
           <button
             onClick={() => handleClick()}
-            className={`bg-green-600 px-4 py-2 rounded-full font-bold border-2 border-black`}
+            className={`bg-green-600 hover:bg-green-700 px-4 py-2 rounded-full font-bold border-2 border-black`}
           >
             Add Client
           </button>

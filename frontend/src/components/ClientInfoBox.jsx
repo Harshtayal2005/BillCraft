@@ -3,19 +3,18 @@ import React from "react";
 const ClientInfoBox = ({ name, email, userAvatar, removeClient, clientId }) => {
   return (
     <>
-      <div className="inline-flex flex-col gap-4 bg-teal-100 rounded-b-2xl rounded-t-[7rem] shadow-[20px_20px_50px_10px_#1a202c] hover:scale-110 duration-300">
-        <div className="h-[14rem] w-[14rem] rounded-full overflow-hidden border-4 border-teal-900">
+      <div className="inline-flex flex-col gap-4 bg-teal-100 rounded-b-2xl rounded-t-[7rem] shadow-[20px_20px_50px_10px_#1a202c] md:hover:scale-105 duration-500 w-[13rem]">
+        <div className="h-[13rem] w-[13rem] rounded-full overflow-hidden border-4 border-teal-900">
           <img
             src={`${userAvatar}`}
-            alt="jisoo image"
+            alt="avatar"
             className="h-full w-full object-cover"
           />
         </div>
-        <div className="font-bold p-3 flex flex-col items-center gap-1">
-          <p className="text-lg">{name}</p>
-          <p className="text-sm text-gray-500">{email}</p>
+        <div className="font-bold py-3 px-1 flex flex-col items-center gap-1">
+          <p className="text-lg break-all">{name}</p>
+          <p className="text-sm text-gray-500 break-all">{email}</p>
         </div>
-
         <div
           className={`${
             clientId === "Harsh-default" && "hidden"
