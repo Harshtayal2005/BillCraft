@@ -48,10 +48,10 @@ const Clients = () => {
     if (!window.confirm("Are you sure you want to remove the client?")) return;
     try {
       await axios.delete(`/api/v1/profile/remove/${clientId}`);
-      notify();
       setClients((prevClients) =>
         prevClients.filter((client) => client._id !== clientId)
       );
+      notify();
     } catch (error) {
       navigate("/error");
     }
