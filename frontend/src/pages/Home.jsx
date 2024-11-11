@@ -136,6 +136,9 @@ const Home = () => {
                     <RxAvatar />
                     <button onClick={handleClick}>Add Yours</button>
                   </div>
+                  <div>
+                    <button onClick={() => navigate("/clients")} className="text-lg sm:text-xl">Clients</button>
+                  </div>
                 </div>
                 <div
                   onClick={handleLogoutClick}
