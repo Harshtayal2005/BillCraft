@@ -18,8 +18,10 @@ app.use(cookieParser());
 import userRouter from "./routes/user.route.js";
 import profileRouter from "./routes/profile.route.js";
 import userAvatarRouter from "./routes/userAvatar.route.js"
+import emailRouter from "./routes/email.route.js"
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/profile", profileRouter);
 app.use("/api/v1/userAvatar", userAvatarRouter)
+app.use("/api/v1/send-email", emailRouter)
 
 export default app;
