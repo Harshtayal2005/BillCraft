@@ -4,8 +4,6 @@ import AddClientForm from "../components/AddClientForm.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBackCircle } from "react-icons/io5";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Clients = () => {
   const navigate = useNavigate();
@@ -19,17 +17,7 @@ const Clients = () => {
   ]);
   const [toggleForm, setToggleForm] = useState(0);
   const [loading, setLoading] = useState(true);
-  const notify = () =>
-    toast.success("Client removed", {
-      position: "top-right",
-      autoClose: 500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -48,7 +36,6 @@ const Clients = () => {
     if (!window.confirm("Are you sure you want to remove the client?")) return;
     try {
       await axios.delete(`/api/v1/profile/remove/${clientId}`);
-      notify();
       setClients((prevClients) =>
         prevClients.filter((client) => client._id !== clientId)
       );
@@ -63,7 +50,6 @@ const Clients = () => {
 
   return (
     <>
-      <ToastContainer />
       {loading && (
         <div className="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50">
           <div className="spinner-border animate-spin h-24 w-24 border-t-4 border-teal-700 rounded-full"></div>
