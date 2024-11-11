@@ -45,7 +45,7 @@ const Clients = () => {
   }, [clients, toggleForm]);
 
   const removeClient = async (clientId) => {
-    alert("You sure you want to remove the client?");
+    if (!window.confirm("Are you sure you want to remove the client?")) return;
     try {
       await axios.delete(`/api/v1/profile/remove/${clientId}`);
       notify();
