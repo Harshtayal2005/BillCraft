@@ -10,9 +10,9 @@ const Clients = () => {
   const [clients, setClients] = useState([
     {
       _id: "Harsh-default",
-      name: "Harsh Fav Client ❤️",
+      name: "Harsh's Fav Client 😄",
       email: "soyaa0301@gmail.com",
-      userAvatar: "jisoo.png",
+      userAvatar: "jisoo.webp",
     },
   ]);
   const [toggleForm, setToggleForm] = useState(0);
