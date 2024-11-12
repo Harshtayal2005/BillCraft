@@ -33,6 +33,10 @@ const router = createBrowserRouter([
     element: <Template1 />
   },
   {
+    path: "/testing1",
+    element: <Template1 />
+  },
+  {
     path: "*",
     element: <ErrorPage />
   }

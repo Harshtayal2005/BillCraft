@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import ImageUploader from "../../components/ImageUploader.jsx";
+import Mailer from "../../components/Mailer.jsx";
 import { countryList } from "./countryCodes.js";
 
 const Template1 = () => {
@@ -45,6 +46,7 @@ const Template1 = () => {
   const [totalSum, setTotalSum] = useState(0);
   const [subTotalSum, setSubTotalSum] = useState(0);
   const [countrySymbol, setCountrySymbol] = useState("$");
+  const [toggle, setToggle] = useState(0);
 
   const updateTotalSum = () => {
     const newTotal = amnt.reduce((acc, curr) => acc + curr, 0);
@@ -91,6 +93,9 @@ const Template1 = () => {
   const handleCurrChange = (e) => {
     const keyCurrency = e.target.value;
     setCountrySymbol(countryList[keyCurrency]);
+  };
+  const handleClick = () => {
+    setToggle(1 - toggle);
   };
 
   useEffect(() => {
@@ -145,6 +150,7 @@ const Template1 = () => {
   };
   return (
     <>
+      {toggle === 1 && <Mailer handleClick={handleClick} />}
       <div className="min-h-screen flex flex-col gap-10 md:gap-0 md:flex md:flex-row">
         <div
           className="flex flex-col justify-between w-full md:w-[80%] border-r border-black"
@@ -266,7 +272,7 @@ const Template1 = () => {
                     ref={taxRef}
                     onChange={updateTotalSum}
                     placeholder="tax"
-                    className="text-right appearance-none w-[5rem]"
+                    className="text-right appearance-none w-[5rem] outline-none"
                   />
                 </div>
                 <div className="flex justify-between">
@@ -276,7 +282,7 @@ const Template1 = () => {
                     ref={discountRef}
                     onChange={updateTotalSum}
                     placeholder="discount"
-                    className="text-right appearance-none w-[5rem]"
+                    className="text-right appearance-none w-[5rem] outline-none"
                   />
                 </div>
                 <div className="border border-black my-2"></div>
@@ -292,27 +298,26 @@ const Template1 = () => {
             <div className="flex justify-between xsm:mx-12 mx-8 mt-4">
               <div className="flex flex-col w-1/2">
                 <h1 className="font-bold text-2xl">Terms and Conditions</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Sapiente fuga, dolorem voluptatibus accusamus impedit
-                  ratione?.
-                </p>
+                <textarea className="outline-none resize-none" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente fuga dolorem voluptatibus accusamus impedit ratione?."></textarea>
               </div>
               <div className="flex flex-col items-end">
-                <h1 className="font-bold text-2xl">Harsh Tayal</h1>
-                <p>Manager</p>
+                <input type="text" placeholder="Harsh Tayal" className="text-end text-2xl font-bold outline-none  w-40 xsm:w-52" />
+                <p className="font-bold">Manager</p>
               </div>
             </div>
           </div>
 
           {/* footer */}
-          <div className="bg-orange-400 h-8"></div>
+          <div className="bg-orange-400 h-8 mt-6"></div>
         </div>
 
         <div className="w-full md:w-[20%] h-56 md:h-screen flex flex-col gap-5 md:justify-center items-center">
+          <button onClick={handleClick} className="hidden md:block bg-yellow-500 hover:bg-yellow-600 py-3 px-5 rounded-xl text-[1.2rem] font-bold">
+            Direct mail
+          </button>
           <button
             onClick={downloadPdf}
-            className="hidden md:block bg-green-500 py-2 px-6 rounded-xl text-[1.2rem] font-bold"
+            className="hidden md:block bg-green-500 hover:bg-green-600 py-3 px-6 rounded-xl text-[1.2rem] font-bold"
           >
             Download
           </button>
@@ -333,10 +338,13 @@ const Template1 = () => {
             </div>
           </div>
         </div>
-        <div className="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-500 flex justify-end px-5">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-500 flex justify-between px-5">
+          <button onClick={handleClick} className="bg-yellow-500 hover:bg-yellow-600 font-bold py-3 px-2 rounded-lg my-2">
+            Direct mail
+          </button>
           <button
             onClick={downloadPdf}
-            className="bg-green-500 font-bold py-3 px-2 rounded-lg my-2"
+            className="bg-green-500 hover:bg-green-600 font-bold py-3 px-2 rounded-lg my-2"
           >
             Download
           </button>
