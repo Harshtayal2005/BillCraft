@@ -151,7 +151,9 @@ const Template1 = () => {
   return (
     <>
       {toggle === 1 && <Mailer handleClick={handleClick} />}
-      <div className={`${toggle === 1 && "hidden"} min-h-screen flex flex-col gap-10 md:gap-0 md:flex md:flex-row`}>
+      <div
+        className={`${toggle === 1 && "md:hidden hidden"} min-h-screen gap-10 md:gap-0 flex flex-col md:flex md:flex-row`}
+      >
         <div
           className="flex flex-col justify-between w-full md:w-[80%] border-r border-black"
           id="template-1"
@@ -298,10 +300,17 @@ const Template1 = () => {
             <div className="flex justify-between xsm:mx-12 mx-8 mt-4">
               <div className="flex flex-col w-1/2">
                 <h1 className="font-bold text-2xl">Terms and Conditions</h1>
-                <textarea className="outline-none resize-none" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente fuga dolorem voluptatibus accusamus impedit ratione?."></textarea>
+                <textarea
+                  className="outline-none resize-none"
+                  placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente fuga dolorem voluptatibus accusamus impedit ratione?."
+                ></textarea>
               </div>
               <div className="flex flex-col items-end">
-                <input type="text" placeholder="Harsh Tayal" className="text-end text-2xl font-bold outline-none  w-40 xsm:w-52" />
+                <input
+                  type="text"
+                  placeholder="Harsh Tayal"
+                  className="text-end text-2xl font-bold outline-none  w-40 xsm:w-52"
+                />
                 <p className="font-bold">Manager</p>
               </div>
             </div>
@@ -312,7 +321,10 @@ const Template1 = () => {
         </div>
 
         <div className="w-full md:w-[20%] h-56 md:h-screen flex flex-col gap-5 md:justify-center items-center">
-          <button onClick={handleClick} className="hidden md:block bg-yellow-500 hover:bg-yellow-600 py-3 px-5 rounded-xl text-[1.2rem] font-bold">
+          <button
+            onClick={handleClick}
+            className="hidden md:block bg-yellow-500 hover:bg-yellow-600 py-3 px-5 rounded-xl text-[1.2rem] font-bold"
+          >
             Direct mail
           </button>
           <button
@@ -339,7 +351,10 @@ const Template1 = () => {
           </div>
         </div>
         <div className="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-500 flex justify-between px-5">
-          <button onClick={handleClick} className="bg-yellow-500 hover:bg-yellow-600 font-bold py-3 px-2 rounded-lg my-2">
+          <button
+            onClick={handleClick}
+            className="bg-yellow-500 hover:bg-yellow-600 font-bold py-3 px-2 rounded-lg my-2"
+          >
             Direct mail
           </button>
           <button
