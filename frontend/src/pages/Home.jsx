@@ -169,7 +169,7 @@ const Home = () => {
                 key={template}
                 onClick={() =>
                   window.open(
-                    "http://localhost:5173/template1"
+                    "https://bill-craft-by-harshtayal.vercel.app/template1"
                   )
                 }
                 className="h-[30rem] w-[20rem] rounded-lg border border-gray-300 overflow-hidden hover:cursor-pointer lg:hover:scale-105 duration-500"
