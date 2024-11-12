@@ -22,7 +22,7 @@ const addUserAvatar = async (req, res) => {
                 return res.status(500).json({ error: "Avatar not uploaded!" });
             }
         } else {
-            avatarUrl = "https://api.dicebear.com/9.x/adventurer/svg";
+            avatarUrl = "https://api.dicebear.com/7.x/notionists/svg?seed=John?size=64";
         }
         const existedUserAvatar = await UserAvatar.findOne({ userId: id });
         if (!existedUserAvatar) {
@@ -58,7 +58,7 @@ const addUserAvatar = async (req, res) => {
 
 const getUserAvatar = async (req, res) => {
     const { id } = req.user;
-    const DEFAULT_AVATAR_URL = "https://api.dicebear.com/9.x/adventurer/svg";
+    const DEFAULT_AVATAR_URL = "https://api.dicebear.com/7.x/notionists/svg?seed=John?size=64";
     try {
         let avatar = await UserAvatar.findOne({ userId: id });
         if (!avatar) {

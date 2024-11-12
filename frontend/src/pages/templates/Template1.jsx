@@ -151,7 +151,7 @@ const Template1 = () => {
   return (
     <>
       {toggle === 1 && <Mailer handleClick={handleClick} />}
-      <div className="min-h-screen flex flex-col gap-10 md:gap-0 md:flex md:flex-row">
+      <div className={`${toggle === 1 && "hidden"} min-h-screen flex flex-col gap-10 md:gap-0 md:flex md:flex-row`}>
         <div
           className="flex flex-col justify-between w-full md:w-[80%] border-r border-black"
           id="template-1"
