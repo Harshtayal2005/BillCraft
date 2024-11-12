@@ -26,7 +26,6 @@ const Clients = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.log("No Clients were found for this user");
       }
     };
     fetchClients();

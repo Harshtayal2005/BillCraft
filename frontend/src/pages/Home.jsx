@@ -56,7 +56,6 @@ const Home = () => {
       navigate("/signin");
     } catch (error) {
       navigate("/error");
-      console.log("Error logging out", error);
     }
   };
 

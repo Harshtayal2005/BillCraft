@@ -20,7 +20,6 @@ const uploadOnCloudinary = async (buffer) => {
             uploadStream.end(buffer);
         });
     } catch (error) {
-        console.error("Cloudinary upload failed:", error);
         return null;
     }
 };

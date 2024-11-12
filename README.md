@@ -23,8 +23,8 @@ Deployed on Vercel | [Visit BillCraft](https://bill-craft-by-harshtayal.vercel.a
 
 ## Tech Stack
 
-- **Frontend**: React, React Hook Form, Axios, CSS
-- **Backend**: Node.js, Express, MongoDB, Cloudinary (for image handling)
+- **Frontend**: React, React Hook Form, Axios, Tailwind CSS, jspdf(for pdf downloads)
+- **Backend**: Node.js, Express, MongoDB, Cloudinary (for image handling), Multer(for file handling), nodemailer(for mail handling)
 - **Deployment**: Vercel (Frontend & Backend)
 
 ---
