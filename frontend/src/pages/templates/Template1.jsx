@@ -4,8 +4,11 @@ import html2canvas from "html2canvas";
 import ImageUploader from "../../components/ImageUploader.jsx";
 import Mailer from "../../components/Mailer.jsx";
 import { countryList } from "./countryCodes.js";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Template1 = () => {
+  const navigate = useNavigate();
   const downloadPdf = () => {
     const input = document.getElementById("template-1");
     html2canvas(input, { scale: 1 }).then((canvas) => {
@@ -47,6 +50,7 @@ const Template1 = () => {
   const [subTotalSum, setSubTotalSum] = useState(0);
   const [countrySymbol, setCountrySymbol] = useState("$");
   const [toggle, setToggle] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const updateTotalSum = () => {
     const newTotal = amnt.reduce((acc, curr) => acc + curr, 0);
@@ -97,6 +101,23 @@ const Template1 = () => {
   const handleClick = () => {
     setToggle(1 - toggle);
   };
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const response = await axios.get("/api/v1/profile");
+        if (response.status !== 200) {
+          navigate("/error");
+        }
+      } catch (error) {
+        navigate("/welcome");
+      }
+    };
+    const fetchData = async () => {
+      await verifyUser();
+      setLoading(false);
+    }
+    fetchData();
+  }, [navigate]);
 
   useEffect(() => {
     updateTotalSum();
@@ -150,9 +171,16 @@ const Template1 = () => {
   };
   return (
     <>
+      {loading && (
+        <div className="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50">
+          <div className="spinner-border animate-spin h-24 w-24 border-t-4 border-orange-600 rounded-full"></div>
+        </div>
+      )}
       {toggle === 1 && <Mailer handleClick={handleClick} />}
       <div
-        className={`${toggle === 1 && "md:hidden hidden"} min-h-screen gap-10 md:gap-0 flex flex-col md:flex md:flex-row`}
+        className={`${
+          toggle === 1 && "md:hidden hidden"
+        } min-h-screen gap-10 md:gap-0 flex flex-col md:flex md:flex-row`}
       >
         <div
           className="flex flex-col justify-between w-full md:w-[80%] border-r border-black"
