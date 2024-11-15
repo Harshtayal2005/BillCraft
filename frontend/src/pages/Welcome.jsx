@@ -33,7 +33,7 @@ const Welcome = () => {
             <div>
               <button
                 onClick={() => navigate("/register")}
-                className="bg-teal-600 py-3 px-6 sm:py-4 sm:px-8 rounded-2xl font-bold text-xl sm:text-2xl"
+                className="bg-teal-600 hover:bg-teal-700 py-3 px-6 sm:py-4 sm:px-8 rounded-2xl font-bold text-xl sm:text-2xl"
               >
                 Get Started
               </button>
