@@ -7,7 +7,7 @@ const Welcome = () => {
     <>
       <div className="min-h-screen bg-black flex flex-col justify-center">
         <div className="flex text-white items-center gap-1 absolute left-4 top-4">
-          <h1 className="text-3xl font-great-vibes-regular">BillCraft</h1>
+          <h1 className="text-3xl font-dancing-script lg:font-great-vibes-regular">BillCraft</h1>
           <img src="/invoice.svg" alt="" className="h-5 w-5" />
         </div>
         <div className="h-full rounded-xl text-white flex flex-col lg:flex-row-reverse justify-center items-center gap-20 lg:gap-0">
@@ -20,7 +20,7 @@ const Welcome = () => {
             <div className="flex items-center gap-2">
               <h1 className="text-3xl xsm:text-5xl md:text-7xl">
                 Welcome to{" "}
-                <span className="font-great-vibes-regular">BillCraft</span>
+                <span className="font-dancing-script lg:font-great-vibes-regular">BillCraft</span>
               </h1>
               {/* <img src="invoice.svg" alt="logo" className="lg:hidden h-10 w-10 md:h-14 md:w-14" /> */}
             </div>
