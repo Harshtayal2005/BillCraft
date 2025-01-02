@@ -60,13 +60,14 @@ const Clients = () => {
           toggleForm === 1 && "hidden"
         } min-h-screen bg-teal-900 py-3 px-10`}
       >
-        <div className="flex justify-end sm:justify-between mb-6">
+        <div className="flex justify-between mb-6">
           <div
             onClick={() => navigate("/")}
-            className="bg-green-600 hover:bg-green-700 hidden sm:flex items-center px-2 border-2 border-black rounded-lg gap-1 hover:cursor-pointer"
+            className="bg-green-600 hover:bg-green-700 flex items-center px-2 border-2 border-black rounded-lg gap-1 hover:cursor-pointer"
           >
             <IoArrowBackCircle />
-            <button className="font-bold">Back to dashboard</button>
+            <button className="hidden sm:flex font-bold">Back to dashboard</button>
+            <button className="sm:hidden font-bold">Back</button>
           </div>
           <button
             onClick={() => handleClick()}
