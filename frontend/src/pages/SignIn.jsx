@@ -50,6 +50,7 @@ const SignIn = () => {
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+      localStorage.setItem("accessToken", tokenResponse.access_token);
       const email = await getUserEmail(tokenResponse.access_token);
 
       if (email) {

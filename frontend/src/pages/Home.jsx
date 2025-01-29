@@ -51,6 +51,10 @@ const Home = () => {
   };
 
   const handleLogoutClick = async () => {
+    const token = localStorage.getItem("accessToken");
+    if(token) {
+      localStorage.removeItem("accessToken");
+    }
     try {
       await axios.post("/api/v1/user/logout", {}, { withCredentials: true });
       navigate("/signin");
