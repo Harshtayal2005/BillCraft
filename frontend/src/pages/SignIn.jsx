@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const SignIn = () => {
   const {
@@ -23,6 +24,54 @@ const SignIn = () => {
       setServerError(error.response?.data?.error || "Login failed");
     }
   };
+
+  const getUserEmail = async (accessToken) => {
+    try {
+      // Make a GET request to the UserInfo API with the access token
+      const response = await axios.get(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Include the access token in the Authorization header
+          },
+        }
+      );
+
+      // Extract the email from the response
+      const email = response.data.email;
+
+      // Return the user's email
+      return email;
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+      return null;
+    }
+  };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const email = await getUserEmail(tokenResponse.access_token);
+
+      if (email) {
+        try {
+          const response = await axios.post(
+            "/api/v1/user/google",
+            { email } // Ensure 'email' is sent in the request body
+          );
+          navigate("/");
+        } catch (error) {
+          setServerError(error.response?.data?.error || "Login failed");
+        }
+      } else {
+        console.log("Failed to get email from google");
+      }
+    },
+    onError: (error) => {
+      console.error("Login Failed:", error);
+    },
+    scope:
+      "openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email", // Corrected scopes
+  });
 
   return (
     <>
@@ -142,6 +191,13 @@ const SignIn = () => {
                   value={isSubmitting ? "Loggin In..." : "LogIn"}
                 />
               </div>
+              <div className="flex justify-center -my-4 text-gray-500">OR</div>
+              <button
+                onClick={googleLogin}
+                className="bg-gray-800 hover:bg-gray-900 w-full py-4 rounded-3xl text-white font-bold text-[0.9rem]"
+              >
+                Sign in with Google 🚀
+              </button>
               <div className="flex justify-center text-[1rem] text-gray-700">
                 <span>
                   {`Don't have an account yet?`}{" "}

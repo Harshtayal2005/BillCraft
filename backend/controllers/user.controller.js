@@ -155,4 +155,44 @@ const getInfo = async (req, res) => {
     }
 };
 
-export { registerUser, loginUser, getInfo, logoutUser };
+const loginWithGoogle = async (req, res) => {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+        return res.status(409).json({
+            error: "Account doesn't exist. Please register.",
+        });
+    }
+    try {
+        //Generate the token
+        const token = jwt.sign(
+            { id: user._id, username: user.username, isAdmin: user.isAdmin },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        );
+
+        //set the cookies
+        const cookieOptions = {
+            httpOnly: true, // Prevent client-side JS from accessing the cookie
+            secure: process.env.NODE_ENV === "production", // Ensure the cookie is only sent over HTTPS in production
+            sameSite: "strict", // Mitigate CSRF attacks
+            maxAge: 24 * 60 * 60 * 1000, // Cookie expiration time (1 day)
+        };
+        res.cookie("token", token, cookieOptions);
+
+        //remove password for response
+        const existedUser = await User.findById(user._id).select("-password");
+
+        //return
+        return res.status(200).json({
+            message: "Login Successful",
+            user: existedUser,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: `Server error, ${error}`,
+        });
+    }
+};
+
+export { registerUser, loginUser, getInfo, logoutUser, loginWithGoogle };
