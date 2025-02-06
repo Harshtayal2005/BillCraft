@@ -37,7 +37,24 @@ const sendEmail = async (req, res) => {
             bcc: recipientEmails,
             subject: "Invoice",
             text: "This email is sent to multiple clients",
-            html: "<p>This invoice is sent to <b>multiple clients</b> using BillCraft</p>",
+            html: `
+                <html>
+                <body style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;">
+                    <p>Hi there,</p>
+            
+                    <p>This is an invoice sent by <b>${primaryRecipient}</b> to multiple clients using <b>BillCraft</b>.</p>
+                    <p>BillCraft is an invoice management system. Check it out here: 
+                    <a href="https://bill-craft-by-harshtayal.vercel.app/" target="_blank">BillCraft</a>.
+                    </p>
+            
+                    <p>Thanks!</p>
+            
+                    <br />
+                    <p style="font-style: italic;">Best regards,</p>
+                    <p style="font-weight: bold;">BillCraft Team</p>
+                </body>
+                </html>
+            `,
             attachments: [
                 {
                     filename: req.file.originalname,
