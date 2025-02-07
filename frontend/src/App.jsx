@@ -6,6 +6,10 @@ import Clients from "./pages/Clients.jsx";
 import Welcome from "./pages/Welcome.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Template1 from "./pages/templates/Template1.jsx";
+import TermsAndConditions from "./pages/TermsAndConditions.jsx";
+import CancellationAndRefund from "./pages/CancellationAndRefund.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import ContactUs from "./pages/ContactUs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +35,22 @@ const router = createBrowserRouter([
   {
     path: "/template1",
     element: <Template1 />
+  },
+  {
+    path: "/terms-and-conditions",
+    element: <TermsAndConditions />
+  },
+  {
+    path: "/cancellation-and-refund",
+    element: <CancellationAndRefund />
+  },
+  {
+    path: "privacy-policy",
+    element: <PrivacyPolicy />
+  },
+  {
+    path: "contact-us",
+    element: <ContactUs />
   },
   {
     path: "*",
