@@ -6,13 +6,17 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { TbLogout2 } from "react-icons/tb";
 import { RxAvatar } from "react-icons/rx";
+import RazorpayPayment from "../components/RazorPayment.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState(null);
   const [toggle, setToggle] = useState(0);
   const [userInfo, setUserInfo] = useState([]);
-  const [templates, setTemplates] = useState([1, 2, 3, 4, 5, 6, 7, 8]);
+  const [templates, setTemplates] = useState([1, 2]);
+  const [premiumTemplates, setPremiumTemplates] = useState([
+    1, 2, 3, 4, 5, 6, 7, 8,
+  ]);
   const [hamBurgerMenu, setHamBurgerMenu] = useState(1);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -52,7 +56,7 @@ const Home = () => {
 
   const handleLogoutClick = async () => {
     const token = localStorage.getItem("accessToken");
-    if(token) {
+    if (token) {
       localStorage.removeItem("accessToken");
     }
     try {
@@ -74,12 +78,22 @@ const Home = () => {
       <div className={`${toggle === 1 && "hidden"} min-h-screen flex`}>
         <div className="hidden w-[20%] bg-gradient-to-tl from-gray-900 to-lime-700 lg:flex flex-col justify-between items-center py-7 text-gray-200">
           <div className="flex flex-col gap-20">
-            <div className="flex gap-1 justify-center">
-              <h1 className="font-great-vibes-regular font-bold text-2xl">
-                BillCraft
-              </h1>
-              <img src="invoice.svg" alt="invoice" className="h-6 w-6" />
+            <div className="flex-col">
+              <div className="flex gap-1 justify-center">
+                <h1 className="font-great-vibes-regular font-bold text-2xl">
+                  BillCraft
+                </h1>
+                <img src="invoice.svg" alt="invoice" className="h-6 w-6" />
+              </div>
+              {userInfo.isAdmin && (
+                <div className="flex justify-center">
+                  <button className="bg-gradient-to-r from-amber-200 to-yellow-500 flex justify-center items-center text-black rounded-full px-2 border border-black font-serif">
+                    Premium
+                  </button>
+                </div>
+              )}
             </div>
+
             <div className="flex flex-col items-center gap-1">
               <div className="flex flex-col gap-1 items-center">
                 <div className="h-20 w-20 rounded-full overflow-hidden">
@@ -140,7 +154,12 @@ const Home = () => {
                     <button onClick={handleClick}>Add Yours</button>
                   </div>
                   <div>
-                    <button onClick={() => navigate("/clients")} className="text-lg sm:text-xl">Clients</button>
+                    <button
+                      onClick={() => navigate("/clients")}
+                      className="text-lg sm:text-xl"
+                    >
+                      Clients
+                    </button>
                   </div>
                 </div>
                 <div
@@ -168,23 +187,58 @@ const Home = () => {
             </div>
           </div>
           <div className="flex flex-wrap justify-evenly gap-8">
-            {templates.map((template) => (
-              <div
-                key={template}
-                onClick={() =>
-                  window.open(
-                    "https://bill-craft-by-harshtayal.vercel.app/template1"
-                  )
-                }
-                className="h-[30rem] w-[20rem] rounded-lg border border-gray-300 overflow-hidden hover:cursor-pointer lg:hover:scale-105 duration-500"
-              >
-                <img
-                  src="template1.png"
-                  alt="template1"
-                  className="h-full w-full object-cover"
-                />
+            {!userInfo.isAdmin &&
+              templates.map((template) => (
+                <div
+                  key={template}
+                  onClick={() =>
+                    window.open(
+                      "https://bill-craft-by-harshtayal.vercel.app/template1"
+                    )
+                  }
+                  className="h-[30rem] w-[20rem] rounded-lg border border-gray-300 overflow-hidden hover:cursor-pointer lg:hover:scale-105 duration-500"
+                >
+                  <img
+                    src="template1.png"
+                    alt="template1"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              ))}
+            {userInfo.isAdmin &&
+              premiumTemplates.map((template) => (
+                <div
+                  key={template}
+                  onClick={() =>
+                    window.open(
+                      "https://bill-craft-by-harshtayal.vercel.app/template1"
+                    )
+                  }
+                  className="h-[30rem] w-[20rem] rounded-lg border border-gray-300 overflow-hidden hover:cursor-pointer lg:hover:scale-105 duration-500"
+                >
+                  <img
+                    src="template1.png"
+                    alt="template1"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              ))}
+            {!userInfo.isAdmin && (
+              <div className="bg-gradient-to-r from-emerald-400 to-cyan-400 w-full p-4 rounded-lg shadow-md text-center">
+                <p className="text-lg font-semibold text-gray-900">
+                  Want to explore more cooler templates?
+                </p>
+                <div className="flex justify-center items-center gap-1 mt-1">
+                  <p className="text-base text-gray-800">Go Premium</p>
+                  <img
+                    src="forwardhand.svg"
+                    alt="forwardhand"
+                    className="h-10 w-10"
+                  />
+                  <RazorpayPayment amount={10} />
+                </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
