@@ -29,7 +29,7 @@ const RazorpayPayment = ({ amount }) => {
       description: "Test Transaction",
       image: "/space.jpg",
       handler: function () {
-        alert("Payment Successful!");
+        alert("Congratulations! You now have access to all the premium templates!");
         window.location.reload();
       },
       theme: { color: "#3399cc" },
