@@ -36,7 +36,7 @@ const Welcome = () => {
                 beautiful, customizable templates.
               </p>
             </div>
-            <div>
+            <div className="mb-4">
               <button
                 onClick={() => navigate("/signin")}
                 className="bg-teal-600 hover:bg-teal-700 py-3 px-6 sm:py-4 sm:px-8 rounded-2xl font-bold text-xl sm:text-2xl"
@@ -46,25 +46,17 @@ const Welcome = () => {
             </div>
           </div>
         </div>
-        <div className="bg-teal-950 text-gray-400 flex flex-col py-1 items-center justify-center w-full absolute bottom-0">
-          <p>© 2025 BillCraft</p>
-          <div className="flex text-xs xsm:text-sm gap-2 xsm:gap-3 sm:text-base underline underline-offset-1">
-            <Link to="/terms-and-conditions">
-              Terms & Conditions
-            </Link>
-            
-            <Link to="/privacy-policy">
-              Privacy Policy
-            </Link>
-            
-            <Link to="/cancellation-and-refund">
-              Refund Policy
-            </Link>
-            
-            <Link to="/contact-us">
-              Contact Us
-            </Link>
-          </div>
+      </div>
+      <div className="bg-teal-950 text-gray-400 flex flex-col py-1 items-center justify-center w-full">
+        <p>© 2025 BillCraft</p>
+        <div className="flex text-xs xsm:text-sm gap-2 xsm:gap-3 sm:text-base underline underline-offset-1">
+          <Link to="/terms-and-conditions">Terms & Conditions</Link>
+
+          <Link to="/privacy-policy">Privacy Policy</Link>
+
+          <Link to="/cancellation-and-refund">Refund Policy</Link>
+
+          <Link to="/contact-us">Contact Us</Link>
         </div>
       </div>
     </>
