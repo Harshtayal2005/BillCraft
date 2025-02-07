@@ -13,12 +13,14 @@ const registerUser = async (req, res) => {
     }
 
     try {
+        const lowerCaseEmail = email.toLowerCase();
+
         //check if any users exist in the database
         const existingUsers = await User.countDocuments();
 
         //Check user already exists or not
         const existedUser = await User.findOne({
-            $or: [{ username }, { email }],
+            $or: [{ username }, { email: lowerCaseEmail }],
         });
 
         if (existedUser) {
@@ -34,7 +36,7 @@ const registerUser = async (req, res) => {
         const user = await User.create({
             username,
             fullname,
-            email,
+            email: lowerCaseEmail,
             password,
             businessName,
             isAdmin,
