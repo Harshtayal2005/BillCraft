@@ -15,9 +15,10 @@ Deployed on Vercel | [Visit BillCraft](https://bill-craft-by-harshtayal.vercel.a
 - 🌐 **Client Management**: Easily add, view, and update client details.
 - 📝 **Customizable Invoice Templates**: Choose from multiple templates to best represent your brand.
 - 📄 **PDF Download & Email Functionality**: Download or email invoices directly.
-- 🔒 **Secure Authentication**: Includes login/logout functionality to protect user data.
+- 🔒 **Secure Authentication**: Includes login/logout functionality to protect user data (Google Oauth 2.0 integrated)
 - 👤 **Profile Avatar Uploader**: Allows users to personalize their profiles.
 - ⚙️ **Error Handling**: Enhanced error handling for a smooth user experience.
+- 💰 **Razorpay Payment Integration**: Allow users to purchase premium memberships (test only)
 
 ---
 
