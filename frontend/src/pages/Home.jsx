@@ -28,7 +28,7 @@ const Home = () => {
           navigate("/error");
         }
       } catch (error) {
-        navigate("/welcome");
+        navigate("/");
       }
     };
     const getAvatar = async () => {
@@ -36,7 +36,7 @@ const Home = () => {
         const response = await axios.get("/api/v1/userAvatar/getAvatar");
         setAvatar(response.data.data.avatarUrl);
       } catch (error) {
-        navigate("/welcome");
+        navigate("/");
       }
     };
     const fetchData = async () => {

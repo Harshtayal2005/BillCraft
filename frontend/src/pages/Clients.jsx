@@ -62,7 +62,7 @@ const Clients = () => {
       >
         <div className="flex justify-between mb-6">
           <div
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/home")}
             className="bg-green-600 hover:bg-green-700 flex items-center px-2 border-2 border-black rounded-lg gap-1 hover:cursor-pointer"
           >
             <IoArrowBackCircle />

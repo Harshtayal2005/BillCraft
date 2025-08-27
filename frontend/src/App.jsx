@@ -12,8 +12,12 @@ import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 
 const router = createBrowserRouter([
-  {
+    {
     path: "/",
+    element: <Welcome />
+  },
+  {
+    path: "/home",
     element: <Home />,
   },
   {
@@ -28,10 +32,7 @@ const router = createBrowserRouter([
     path: "/clients",
     element: <Clients />
   },
-  {
-    path: "/welcome",
-    element: <Welcome />
-  },
+
   {
     path: "/template1",
     element: <Template1 />

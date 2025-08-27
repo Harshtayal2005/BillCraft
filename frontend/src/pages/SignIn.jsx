@@ -19,7 +19,7 @@ const SignIn = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post("/api/v1/user/login", data);
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setServerError(error.response?.data?.error || "Login failed");
     }
@@ -59,7 +59,7 @@ const SignIn = () => {
             "/api/v1/user/google",
             { email } // Ensure 'email' is sent in the request body
           );
-          navigate("/");
+          navigate("/home");
         } catch (error) {
           setServerError(error.response?.data?.error || "Login failed");
         }
